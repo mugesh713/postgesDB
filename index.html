@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .wrapper {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Enter Details</h1>
+        <form action="/insert" method="post" onsubmit="clearForm()">
+            <input type="text" placeholder="Name" required name="name">
+            <input type="text" placeholder="Mobile No" required name="num">
+            <input type="email" placeholder="Email" required name="mail">
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="location.href='/report'">View Report</button>
+    </div>
+    <script>
+        function clearForm() {
+            setTimeout(() => {
+                document.querySelector("form").reset();
+            }, 100);
+        }
+    </script>
+</body>
+</html>

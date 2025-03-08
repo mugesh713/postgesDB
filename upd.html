@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .wrapper {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .wrapper h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input-box input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border: 2px solid #fff;
+            border-radius: 25px;
+            background: transparent;
+            color: #fff;
+        }
+
+        .input-box input::placeholder {
+            color: #fff;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            background: #007bff;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .register-link {
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        .register-link a {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form id="ab" method="post">
+            <h1>Update</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Name" required name="name">
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Mobile No" required maxlength="10" name="num">
+            </div>
+            <div class="input-box">
+                <input type="email" placeholder="Email" name="mail" required>
+            </div>
+            <button type="submit" class="btn">Update</button>
+        </form>
+    </div>
+    <script>
+        const pathname = window.location.pathname;
+        const pathParts = pathname.split('/');
+        const lastPart = pathParts[pathParts.length - 1];
+        const form = document.getElementById("ab");
+        form.setAttribute('action', 'http://localhost:2500/update/' + lastPart);
+    </script>
+</body>
+</html>
