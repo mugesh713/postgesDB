@@ -1,6 +1,7 @@
 const express = require('express');
 const { Pool } = require('pg');
 const path = require('path');
+
 const app = express();
 const port = 2500;
 
@@ -35,7 +36,7 @@ async function initDB() {
 }
 initDB();
 
-// Serve form page
+// Serve main form page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
@@ -52,7 +53,7 @@ app.post('/insert', async (req, res) => {
   }
 });
 
-// Report page: Display stored data in table format
+// Report page: Display stored data in a table format
 app.get('/report', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM details');
@@ -138,13 +139,46 @@ app.get('/change/:id', (req, res) => {
   res.sendFile(path.join(__dirname, 'upd.html'));
 });
 
-// Handle update request
+// Handle update request and print a confirmation message
 app.post('/update/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const { name, num, mail } = req.body;
     await pool.query('UPDATE details SET name=$1, num=$2, mail=$3 WHERE id=$4', [name, num, mail, id]);
-    res.redirect('/report');
+    res.send(`
+      <html>
+      <head>
+        <title>Update Success</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding-top: 50px;
+          }
+          .message {
+            background: #dff0d8;
+            padding: 20px;
+            border: 1px solid #d0e9c6;
+            display: inline-block;
+            border-radius: 5px;
+          }
+          a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="message">
+          <h2>Record updated successfully!</h2>
+          <a href="/report">Go to Report</a>
+        </div>
+      </body>
+      </html>
+    `);
   } catch (err) {
     console.error("Error updating data:", err);
     res.status(500).send("Failed to update data");
