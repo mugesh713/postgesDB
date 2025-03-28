@@ -15,7 +15,6 @@ app.use(express.static(__dirname)); // Serve static files (CSS, JS, images)
 const pool = new Pool({
   user: 'avnadmin',
   host: process.env.AVN_HOST,
-  
   database: 'defaultdb',
   port: 20108,
   password: process.env.AVN_PASSWORD,
